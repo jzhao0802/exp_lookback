@@ -1,0 +1,13 @@
+Path files(server 100):
+Strongbridge
+Train + test
+F:\Projects\Strongbridge\data\modelling\Advanced_model_data\05_combined_train_unmatched_test_capped_freq_datediff.rds
+
+AbbVie SCL
+Train: F:\Projects\AbbVie_SCLC\data\modelling_data\03_training_reduced_features.csv
+
+Biogen
+F:\Projects\Biogen_Tecfidera\Data\Processed\data_model_3_for_hyperparam_search_LM\ data_model_3_for_HP_search.rds
+
+Pfizer (still to be produced)
+F:\Projects\Pfizer_mCRPC\Data\modelling\LRx_Dx_HCPCos
