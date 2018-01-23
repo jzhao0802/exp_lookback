@@ -1,0 +1,7 @@
+extra_data/*
+plots/*
+.ipynb_checkpoints/*
+.Rhistory
+.RData
+
+
