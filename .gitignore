@@ -1,5 +1,6 @@
 extra_data/*
 plots/*
+results/*
 .ipynb_checkpoints/*
 .Rhistory
 .RData

@@ -45,6 +45,7 @@ def run_CV(X, y, clf_class, cv_method, params={}, metrics=[], statsmodel=False, 
     i = 1
     for train_indicies, test_indicies in cv_method.split(X, y):
         print("Running fold ", i, " ...")
+        i = i + 1
         if statsmodel:
             clf = clf_class(y.reindex(train_indicies), X.reindex(train_indicies))
             clf = clf.fit()
@@ -88,7 +89,7 @@ def run_CV(X, y, clf_class, cv_method, params={}, metrics=[], statsmodel=False, 
 
     if flatten:
         cv_outputs['predictions'] = flatten_cv_outputs(cv_outputs['predictions'])
-    i = i + 1
+
     return cv_outputs
 
 def classifaction_report_to_df(report):
@@ -159,3 +160,14 @@ def add_metrics_to_spreadsheet(spreadsheet, model_metrics):
         else:
             df_metrics = pd.merge(df_metrics, pd.DataFrame.from_dict(standard_metrics), on='metric')
     df_metrics.to_excel(spreadsheet, 'metric_comparison', index=False)
+
+def calc_imp_feature(cv_outputs, f_cols):
+    feature_imp = pd.DataFrame()
+    feature_imp['Feature'] = f_cols
+    for i in range(len(cv_outputs['models'])):
+        col = 'Fold_' + str(i)
+        feature_imp[col] = cv_outputs['models'][i].feature_importances_
+    feature_imp['Mean_score'] = feature_imp.iloc[:,1:].mean(axis=1)
+    feature_imp.sort_values(by= 'Mean_score', axis = 0, ascending = False, inplace =True)
+    feature_imp = feature_imp.reset_index(drop = True)
+    return feature_imp
